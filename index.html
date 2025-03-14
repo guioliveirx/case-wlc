@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background-color: lightgray;
+        padding: 30px 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-right: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .mensagem {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form action="index.html" id="loginForm" >
+        <input type="text" id="login" placeholder="Usuário" required/>
+        <input type="text" id="senha" placeholder="Senha" required/>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+
+    <script>
+       // Lista de usuários
+      const users = [
+        { login: "joao_silva", senha: "senha123" },
+        { login: "maria_oliveira", senha: "segredo456" },
+        { login: "pedro_santos", senha: "minhaSenha789" },
+        { login: "ana_costa", senha: "senhaForte!@#" },
+        { login: "lucas_ferreira", senha: "passw0rd987" },
+      ];
+
+      // Cria elemento para adicionar erro no formulário
+      const mensagem = document.createElement("p");
+
+      // Evento para capturar o envio do formulário
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+          
+          let loginUser = document.getElementById("login").value;
+          let senhaUser = document.getElementById("senha").value;
+          
+          // Verificar se o usuário existe no array e a senha está correta
+          const user = users.find((user) => loginUser === user.login && senhaUser === user.senha);
+
+          // Exibir a mensagem de acordo com o resultado
+          if (user) {
+            alert("Login bem sucedido!");
+          } else {
+            event.preventDefault();
+            mensagem.classList.add("mensagem")
+            mensagem.innerHTML = "Usuário ou senha incorreta"
+            document.getElementById("loginForm").appendChild(mensagem);
+          }
+        });
+    </script>
+  </body>
+</html>
